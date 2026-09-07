@@ -54,8 +54,20 @@
       <button class="primary-btn" id="emptyImportBtn">Importer des médias</button>
     </div>
 
+    <div id="importMenu" class="import-menu" hidden>
+      <button id="importPickBtn" class="import-menu-btn">
+        🖼️ Sélectionner des photos/vidéos
+        <span class="import-menu-hint">Astuce : dans le sélecteur, fais glisser ton doigt sur plusieurs vignettes pour en cocher beaucoup d'un coup.</span>
+      </button>
+      <button id="importFolderBtn" class="import-menu-btn" hidden>
+        📁 Importer un dossier entier
+        <span class="import-menu-hint">Choisis par ex. le dossier Camera/DCIM : toutes les photos et vidéos qu'il contient sont importées d'un coup, sans les sélectionner une par une.</span>
+      </button>
+    </div>
+
     <button id="fabImport" class="fab" title="Importer des photos/vidéos" aria-label="Importer">＋</button>
     <input id="fileInput" type="file" accept="image/*,video/*" multiple hidden />
+    <input id="folderInput" type="file" webkitdirectory directory multiple hidden />
 
     <div id="importOverlay" class="overlay" hidden>
       <div class="overlay-card">
