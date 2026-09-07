@@ -1,0 +1,16 @@
+{
+  "name": "Broll Sort — Galerie & Broll",
+  "short_name": "Broll Sort",
+  "description": "Trie, tague et retrouve tes photos et vidéos (surtout tes broll) directement depuis ton téléphone.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0b1220",
+  "theme_color": "#4361ee",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
