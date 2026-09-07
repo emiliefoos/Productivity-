@@ -167,13 +167,61 @@ searchInput.addEventListener("input", () => {
 });
 
 // ---------- Import ----------
-el("fabImport").addEventListener("click", () => fileInput.click());
-el("emptyImportBtn").addEventListener("click", () => fileInput.click());
+const folderInput = el("folderInput");
+const importMenu = el("importMenu");
+const importFolderBtn = el("importFolderBtn");
+
+// Un navigateur ne peut jamais accéder à "toute la galerie" sans que la personne choisisse
+// des fichiers (sécurité du système). Le plus proche d'un "tout importer" en un geste :
+// choisir un dossier entier (ex. Camera/DCIM) plutôt que des fichiers un par un — supporté
+// surtout sur Android/desktop, pas sur le sélecteur Photos d'iPhone.
+const supportsDirectoryPicker = "webkitdirectory" in document.createElement("input");
+if (supportsDirectoryPicker) importFolderBtn.hidden = false;
+
+function openImportMenu() {
+  importMenu.hidden = false;
+}
+function closeImportMenu() {
+  importMenu.hidden = true;
+}
+
+el("fabImport").addEventListener("click", () => {
+  if (importMenu.hidden) openImportMenu();
+  else closeImportMenu();
+});
+el("emptyImportBtn").addEventListener("click", openImportMenu);
+
+document.addEventListener("click", (e) => {
+  if (importMenu.hidden) return;
+  if (importMenu.contains(e.target) || e.target === el("fabImport") || e.target === el("emptyImportBtn")) return;
+  closeImportMenu();
+});
+
+el("importPickBtn").addEventListener("click", () => {
+  closeImportMenu();
+  fileInput.click();
+});
+importFolderBtn.addEventListener("click", () => {
+  closeImportMenu();
+  folderInput.click();
+});
 
 fileInput.addEventListener("change", async () => {
   const files = Array.from(fileInput.files || []);
   fileInput.value = "";
   if (!files.length) return;
+  await importFiles(files);
+});
+
+folderInput.addEventListener("change", async () => {
+  const files = Array.from(folderInput.files || []).filter(
+    (f) => f.type.startsWith("image/") || f.type.startsWith("video/")
+  );
+  folderInput.value = "";
+  if (!files.length) {
+    toast("Aucune photo/vidéo trouvée dans ce dossier");
+    return;
+  }
   await importFiles(files);
 });
 

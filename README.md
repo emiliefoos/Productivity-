@@ -10,7 +10,9 @@ navigateur ou changes de téléphone, il faudra réimporter tes médias.
 
 ## Fonctionnalités
 
-- **Import** depuis la galerie de ton téléphone (sélection multiple, photos et vidéos).
+- **Import** depuis la galerie de ton téléphone (sélection multiple, photos et vidéos), ou
+  **import d'un dossier entier en un tap** (ex. le dossier Camera/DCIM sur Android) pour ne
+  pas avoir à sélectionner chaque fichier un par un.
 - **Tags manuels illimités** + une série de **catégories broll prédéfinies** en un tap
   (Nature, Ville, Mains, Détail, Transition, Ciel/Météo, Mouvement, Calme, etc.).
 - **Suggestions de tags automatiques par IA**, optionnelles, exécutées entièrement sur
@@ -55,10 +57,13 @@ onglet normal.
 
 ## Limites à connaître
 
-- Un navigateur ne peut pas scanner automatiquement toute la pellicule de ton téléphone :
-  à chaque import, tu choisis les photos/vidéos via le sélecteur natif de ta galerie
-  (comme quand tu envoies une photo dans une appli de messagerie). Une fois importés, les
-  médias restent disponibles dans l'app même hors-ligne.
+- Un navigateur ne peut pas scanner automatiquement toute la pellicule de ton téléphone sans
+  action de ta part (sécurité du système) : à chaque import, tu choisis les photos/vidéos via
+  le sélecteur natif de ta galerie (comme quand tu envoies une photo dans une appli de
+  messagerie), ou tu importes un dossier entier en un tap (voir bouton **＋**). Sur iPhone,
+  l'import de dossier n'est pas proposé par le système — utilise la sélection multiple et
+  fais glisser ton doigt sur les vignettes pour en cocher beaucoup d'un coup. Une fois
+  importés, les médias restent disponibles dans l'app même hors-ligne.
 - Les fichiers importés sont **copiés** dans le stockage du navigateur : pour de grosses
   vidéothèques, surveille l'espace utilisé dans **Réglages** (⚙️).
 - Les suggestions IA utilisent un modèle générique (reconnaissance d'objets/lieux) : elles
