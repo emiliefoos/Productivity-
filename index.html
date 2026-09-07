@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Broll Sort — Galerie &amp; Broll</title>
+  <meta name="description" content="Trie, tague et retrouve tes photos et vidéos, surtout tes broll, directement depuis ton téléphone." />
+  <meta name="theme-color" content="#0b1220" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/favicon-32.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Broll Sort" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <header class="topbar">
+      <div class="brand">
+        <img src="icons/icon-192.png" alt="" class="brand-icon" />
+        <div>
+          <h1>Broll Sort</h1>
+          <p id="mediaCount" class="subtitle">Chargement…</p>
+        </div>
+      </div>
+      <button id="settingsBtn" class="icon-btn" title="Réglages" aria-label="Réglages">⚙️</button>
+    </header>
+
+    <div class="search-row">
+      <div class="search-box">
+        <span aria-hidden="true">🔎</span>
+        <input id="searchInput" type="search" placeholder="Rechercher (nom, tag, ex : « mains », « ville »)" />
+      </div>
+    </div>
+
+    <div class="chip-row" id="filterChips">
+      <button class="chip active" data-filter="all">Tout</button>
+      <button class="chip" data-filter="photo">📷 Photos</button>
+      <button class="chip" data-filter="video">🎬 Vidéos</button>
+      <button class="chip" data-filter="favorite">★ Favoris</button>
+      <button class="chip" data-filter="broll">🎞️ Broll</button>
+    </div>
+
+    <div class="chip-row secondary" id="tagChips" hidden></div>
+
+    <main id="gallery" class="gallery"></main>
+
+    <div id="emptyState" class="empty-state" hidden>
+      <div class="empty-emoji">🖼️</div>
+      <h2>Ta galerie est vide</h2>
+      <p>Importe tes premières photos et vidéos pour commencer à les trier et à retrouver tes broll en un clin d'œil.</p>
+      <button class="primary-btn" id="emptyImportBtn">Importer des médias</button>
+    </div>
+
+    <button id="fabImport" class="fab" title="Importer des photos/vidéos" aria-label="Importer">＋</button>
+    <input id="fileInput" type="file" accept="image/*,video/*" multiple hidden />
+
+    <div id="importOverlay" class="overlay" hidden>
+      <div class="overlay-card">
+        <p id="importStatus">Analyse des fichiers…</p>
+        <div class="progress-track"><div id="importProgressBar" class="progress-fill"></div></div>
+        <p id="importSub" class="muted"></p>
+      </div>
+    </div>
+
+    <div id="detailModal" class="modal" hidden>
+      <div class="modal-backdrop" id="modalBackdrop"></div>
+      <div class="modal-sheet">
+        <button id="closeModal" class="icon-btn modal-close" aria-label="Fermer">✕</button>
+        <div id="detailPreview" class="detail-preview"></div>
+
+        <div class="detail-actions">
+          <button id="toggleFavorite" class="pill-btn">★ Favori</button>
+          <button id="toggleBroll" class="pill-btn">🎞️ Broll</button>
+          <button id="deleteMedia" class="pill-btn danger">🗑️ Supprimer</button>
+        </div>
+
+        <div class="detail-meta" id="detailMeta"></div>
+
+        <div class="tag-editor">
+          <p class="section-label">Catégories broll rapides</p>
+          <div id="presetChips" class="chip-row secondary wrap"></div>
+
+          <p class="section-label">Tags de ce média</p>
+          <div id="currentTags" class="chip-row secondary wrap"></div>
+
+          <form id="addTagForm" class="add-tag-form">
+            <input id="addTagInput" type="text" placeholder="Ajouter un tag personnalisé…" autocomplete="off" />
+            <button type="submit" class="primary-btn small">Ajouter</button>
+          </form>
+
+          <div id="suggestedTagsWrap" hidden>
+            <p class="section-label">Suggestions IA (appuie pour ajouter)</p>
+            <div id="suggestedTags" class="chip-row secondary wrap"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="settingsModal" class="modal" hidden>
+      <div class="modal-backdrop" id="settingsBackdrop"></div>
+      <div class="modal-sheet small">
+        <button id="closeSettings" class="icon-btn modal-close" aria-label="Fermer">✕</button>
+        <h2>Réglages</h2>
+
+        <label class="switch-row">
+          <span>Suggestions automatiques par IA (sur l'appareil)</span>
+          <input type="checkbox" id="aiToggle" />
+        </label>
+        <p class="muted small-note">Télécharge un petit modèle de reconnaissance d'image (~10 Mo) la première fois, puis fonctionne hors-ligne. Aucune photo n'est envoyée où que ce soit.</p>
+
+        <div class="storage-info">
+          <p class="section-label">Stockage sur cet appareil</p>
+          <p id="storageText" class="muted">—</p>
+          <div class="progress-track"><div id="storageBar" class="progress-fill"></div></div>
+          <button id="persistBtn" class="secondary-btn">Protéger le stockage (éviter le nettoyage auto)</button>
+        </div>
+
+        <p class="muted small-note">Tout est stocké uniquement dans ce navigateur, sur ton téléphone. Rien n'est envoyé à un serveur.</p>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" hidden></div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
